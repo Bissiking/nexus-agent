@@ -60,11 +60,28 @@ if (token == "" || token == undefined) {
     // TENTATIVE DE CONNEXION ......
     axios.get(ConfigNexus.url+'/agent/init/'+token)
       .then(function (response) {
-        console.log(response.data);
+        console.log('RESPONSE: '+response.data);
         if(!fs.existsSync('dataAgent.json') && response.data != 'used'){
             // Ecriture des data de l'agent
             WriteAgentData(response.data);
+        }else{
+            console.log('skip');
         }
+
+        setTimeout(() => {
+            // Module avec token obligatoire
+            if (token != "" || token != undefined) {
+                ForkStart('dataAgent');
+            }
+            // Lancement de l'API
+            ForkStart('api');
+            
+            // Lancement des sondes
+            ForkStart('cpu');
+            ForkStart('ram');
+            ForkStart('disk');
+        
+        }, 5000);
       })
       .catch(function (error) {
         Logs(Mod, 'error', 'Echec de la connexion avec Nexus');
@@ -76,18 +93,3 @@ WriteDocs("./logs", "./logs/monitoring");
 WriteDocs("./logs", "./logs/last_monitoring");
 
 // Lancement des modules après 5 secondes
-
-setTimeout(() => {
-    // Module avec token obligatoire
-    if (token != "" || token != undefined) {
-        ForkStart('dataAgent');
-    }
-    // Lancement de l'API
-    ForkStart('api');
-    
-    // Lancement des sondes
-    ForkStart('cpu');
-    ForkStart('ram');
-    ForkStart('disk');
-
-}, 500);

@@ -2,5 +2,5 @@
     "name": "Agent V1",
     "port": "3001",
     "url": "https://nexus.mhemery.fr",
-    "token": ""
+    "token": "test"
 }
