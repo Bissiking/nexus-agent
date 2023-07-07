@@ -47,7 +47,7 @@ function up_monitoring(sonde) {
         // Envoie de la version de l'agent à Nexus
         axios.post(ConfigNexus.url + '/agent/upload/monitoring', DataSonde, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
             .then(function (response) {
-                Logs(Mod, 'error', 'Envoie des informations OK');
+                Logs(Mod, 'succes', 'Envoie des informations OK');
             })
             .catch(function (error) {
                 console.log(error);

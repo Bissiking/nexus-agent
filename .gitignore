@@ -1,6 +1,7 @@
 # Dossier et fichier
 data/fork
 data/dataAgent.json
+data/config.json
 
 # Logs
 logs
