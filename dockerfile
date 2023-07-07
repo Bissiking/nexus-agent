@@ -7,4 +7,4 @@ RUN npm i
 
 ENV token=
 
-CMD ["/bin/sh" "-c" "index.js"]
+CMD ["bash" "index.js"]
