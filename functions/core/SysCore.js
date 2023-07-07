@@ -29,8 +29,8 @@ function WriteAgentData(data) {
     // and writting to data.json file
     const dataJSON = JSON.stringify(forkinfoObject);
     // Ecriture du fichier
-    WriteDocs("./data", "./data/fork_data");
-    fs.writeFileSync("./data/agent/" + data.id_agent + ".json", dataJSON);
+    WriteDocs("./data", "./data");
+    fs.writeFileSync("./data/dataAgent.json", dataJSON);
 }
 
 function WriteErrorAgent(alerte, Module, description) {
@@ -97,4 +97,20 @@ function WriteLogs(data, Sondes) {
     fs.writeFileSync("./logs/monitoring/"+Sondes+".json", jsonStr);
 }
 
-module.exports = { WriteDocs, WriteAgentData, WriteErrorAgent, WriteLogsOsLast, WriteLogs }
+function TokenSearch() {
+    
+    if (process.env.token == undefined || process.env.token == "") {
+        // Vérification du fichier de config
+        const ConfigNexus = require('../../data/config.json');
+        if (ConfigNexus.token == undefined || ConfigNexus.token == "") {
+            return null;
+        }else{
+            return ConfigNexus.token;
+        }
+    }else{
+        // Renvoi du token
+        return process.env.token;
+    }
+}
+
+module.exports = { WriteDocs, WriteAgentData, WriteErrorAgent, WriteLogsOsLast, WriteLogs, TokenSearch }
