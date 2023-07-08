@@ -65,11 +65,13 @@ dataVersion();
 
 up_monitoring('cpu');
 up_monitoring('mem');
+up_monitoring('disk');
 
 // Envoie donnée CPU, RAM, .... toutes les x temps
 setInterval(() => {
     up_monitoring('cpu');
     up_monitoring('mem');
+    up_monitoring('disk');
 }, 5000); // Actualisation du module toutes les heures
 
 setInterval(() => {

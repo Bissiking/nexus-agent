@@ -26,4 +26,4 @@ DISK();
 
 setInterval(() => {
     DISK();
-}, 20000); // Actualisation du module toutes les 5 Secondes
+}, 20000); // Actualisation du module toutes les 20 Secondes
