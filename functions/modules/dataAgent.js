@@ -32,7 +32,6 @@ function dataVersion() {
 
 function up_monitoring(sonde) {
     let token = TokenSearch();
-    console.log(token);
     // Récupération des logs
     fs.readFile('./logs/last_monitoring/' + sonde + '_last.json', "utf8", function (err, data) {
         if (err) {
@@ -71,8 +70,11 @@ up_monitoring('disk');
 setInterval(() => {
     up_monitoring('cpu');
     up_monitoring('mem');
-    up_monitoring('disk');
 }, 5000); // Actualisation du module toutes les heures
+
+setInterval(() => {
+    up_monitoring('disk');
+}, 20000) // Envoie des données toutes les 20 secondes
 
 setInterval(() => {
     dataVersion();
