@@ -46,7 +46,7 @@ function Core() {
         axios.get(ConfigNexus.url + '/agent/init/' + token)
             .then(function (response) {
                 console.log('RESPONSE: ' + response.data);
-                if (!fs.existsSync('dataAgent.json') && response.data != 'used') {
+                if (!fs.existsSync('dataAgent.json')) {
                     // Ecriture des data de l'agent
                     WriteAgentData(response.data);
                 } else {
