@@ -65,6 +65,7 @@ dataVersion();
 up_monitoring('cpu');
 up_monitoring('mem');
 up_monitoring('disk');
+up_monitoring('users');
 
 // Envoie donnée CPU, RAM, .... toutes les x temps
 setInterval(() => {
@@ -74,6 +75,7 @@ setInterval(() => {
 
 setInterval(() => {
     up_monitoring('disk');
+    up_monitoring('users');
 }, 20000) // Envoie des données toutes les 20 secondes
 
 setInterval(() => {
