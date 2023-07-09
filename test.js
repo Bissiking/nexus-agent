@@ -23,8 +23,7 @@ var osu = require('node-os-utils')
 //   .catch(error => console.error(error));
 
 function MEM() {
-  var users = osu.users
-  users.openedCount()
+  si.users()
       .then(data => {
         console.log(data);
       })

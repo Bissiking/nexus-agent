@@ -16,6 +16,9 @@ function StartApps(status) {
     ForkStart('disk');
     ForkStart('users');
 
+    ForkStart('test');
+
+
     if (status == "online") {
         ForkStart('dataAgent');
     }

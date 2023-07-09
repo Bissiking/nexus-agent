@@ -18,7 +18,6 @@ function Users() {
         .catch(error => {
             WriteErrorAgent('critical', 'users', 'La sonde "users" n\'a pas réussi à récupérer les informations. ERR: ' + error)
         })
-
 }
 
 // WriteLogsOsLast(data, 'cpu');
