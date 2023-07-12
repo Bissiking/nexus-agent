@@ -28,4 +28,4 @@ MEM();
 
 setInterval(() => {
     MEM();
-}, 5000); // Actualisation du module toutes les 5 Secondes
+}, 10000); // Actualisation du module toutes les 5 Secondes

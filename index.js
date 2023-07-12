@@ -16,7 +16,7 @@ function StartApps(status) {
     ForkStart('disk');
     ForkStart('users');
 
-    ForkStart('test');
+    // ForkStart('test');
 
 
     if (status == "online") {
@@ -52,7 +52,11 @@ function Core() {
                 console.log('RESPONSE: ' + response.data);
                 if (!fs.existsSync('dataAgent.json')) {
                     // Ecriture des data de l'agent
-                    WriteAgentData(response.data);
+                    if (response.data != "not_found") {
+                        WriteAgentData(response.data);
+                    }else{
+                        console.log("Non trouvé");
+                    }
                 } else {
                     console.log('skip');
                 }
@@ -65,11 +69,6 @@ function Core() {
             });
     }
 }
-
-
-
-
-
 
 // Création des dossiers nécessaires a l'agent
 WriteDocs("./logs", "./logs/alerte");

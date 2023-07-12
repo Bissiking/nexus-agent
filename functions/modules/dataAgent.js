@@ -71,7 +71,7 @@ up_monitoring('users');
 setInterval(() => {
     up_monitoring('cpu');
     up_monitoring('mem');
-}, 5000); // Actualisation du module toutes les heures
+}, 17000); // Actualisation du module toutes les 7 secondes
 
 setInterval(() => {
     up_monitoring('disk');
