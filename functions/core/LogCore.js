@@ -8,9 +8,21 @@ function LogDate() {
     return nz_date_string;
 }
 
+function LogDateNohours() {
+    // Date object initialized as per New Zealand timezone. Returns a datetime string
+    let annee = new Date().getFullYear(),
+        mois  = new Date().getMonth(), 
+        jour  = new Date().getDate();
+  
+    return annee+''+mois+''+jour;
+}
+
 function LogWriter(logPush) {
+    let LogHours = LogDateNohours();
+    LogsFiles = './logs/'+LogHours+'_logs.json';
+    
     // Vérification de la présence des logs
-    if (!fs.existsSync('./logs/logs.json')) {
+    if (!fs.existsSync()) {
         WriteDocs("./logs", "./logs");
         let logsDataStart = { "Logs": [] }
         let datainfoJSON = JSON.stringify(logsDataStart);
@@ -19,11 +31,11 @@ function LogWriter(logPush) {
         // and writting to data.json file
         let dataJSON = JSON.stringify(datainfoObject);
         // Ecriture des logs
-        fs.writeFileSync("./logs/logs.json", dataJSON);
+        fs.writeFileSync(LogsFiles, dataJSON);
     }
 
     // Récupération du fichier LOGS
-    let logsData = fs.readFileSync("./logs/logs.json");
+    let logsData = fs.readFileSync(LogsFiles);
     // Mise en OBJ
     var logobj = JSON.parse(logsData);
     // PUSH TO VARIABLE
@@ -31,7 +43,7 @@ function LogWriter(logPush) {
     // Mise en Strg
     jsonStr = JSON.stringify(logobj);
     // Ecriture des logs
-    fs.writeFileSync("./logs/logs.json", jsonStr);
+    fs.writeFileSync(LogsFiles, jsonStr);
 }
 
 function Logs(module, type, message) {

@@ -11,7 +11,7 @@ function CPU() {
     cpu.usage()
         .then(data => {
             WriteLogsOsLast(data, 'cpu');
-            WriteLogs(data, 'cpu')
+            WriteLogs(data, 'cpu');
             fs.existsSync('/logs/critical/CPU.json', function () {
                 fs.rmSync('/logs/critical/CPU.json');
             })
@@ -28,4 +28,4 @@ CPU();
 
 setInterval(() => {
     CPU();
-}, 10000); // Actualisation du module toutes les 5 Secondes
+}, 10000); // Actualisation du module toutes les 10 Secondes

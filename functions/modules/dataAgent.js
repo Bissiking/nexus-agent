@@ -45,9 +45,7 @@ function up_monitoring(sonde) {
 
         // Envoie de la version de l'agent à Nexus
         axios.post(ConfigNexus.url + '/agent/upload/monitoring', DataSonde, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
-            .then(function (response) {
-                Logs(Mod, 'succes', 'Envoie des informations OK');
-            })
+            .then(function (response) {})
             .catch(function (error) {
                 console.log(error);
                 Logs(Mod, 'error', 'Echec de la connexion avec Nexus');
@@ -71,12 +69,12 @@ up_monitoring('users');
 setInterval(() => {
     up_monitoring('cpu');
     up_monitoring('mem');
-}, 17000); // Actualisation du module toutes les 7 secondes
+}, 17000); // Actualisation du module toutes les 17 secondes
 
 setInterval(() => {
     up_monitoring('disk');
     up_monitoring('users');
-}, 20000) // Envoie des données toutes les 20 secondes
+}, 60000) // Envoie des données toutes les 1 minutes
 
 setInterval(() => {
     dataVersion();

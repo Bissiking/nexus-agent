@@ -11,7 +11,7 @@ function MEM() {
     mem.info()
         .then(data => {
             WriteLogsOsLast(data, 'mem');
-            WriteLogs(data, 'mem')
+            WriteLogs(data, 'mem');
             fs.existsSync('/logs/critical/MEM.json', function () {
                 fs.rmSync('/logs/critical/MEM.json');
             })
@@ -28,4 +28,4 @@ MEM();
 
 setInterval(() => {
     MEM();
-}, 10000); // Actualisation du module toutes les 5 Secondes
+}, 10000); // Actualisation du module toutes les 10 Secondes

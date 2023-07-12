@@ -10,6 +10,15 @@ function LogDate() {
     return nz_date_string;
 }
 
+function LogDateNohours() {
+    // Date object initialized as per New Zealand timezone. Returns a datetime string
+    let annee = new Date().getFullYear(),
+        mois  = new Date().getMonth(), 
+        jour  = new Date().getDate();
+  
+    return annee+''+mois+''+jour;
+}
+
 // function(Dossier Source, Dossier Interne)
 function WriteDocs(Docs, DocsTwo) { // Ecriture du dossier data
     if (!fs.existsSync(Docs)) {
@@ -65,7 +74,11 @@ function WriteLogs(data, Sondes) {
 
     // Récupération de la Date
     let date = LogDate();
+    // Récuépration de la date (sans l'heure)
+    let LogDatehours = LogDateNohours();
 
+    // Création variables Logs files
+    let filesdirectory = './logs/monitoring/'+LogDatehours+'_'+Sondes+'.json';
     // Création de la variable
     let donnees = {
         time: date,
@@ -73,7 +86,7 @@ function WriteLogs(data, Sondes) {
     }
 
     // Vérification de la présence des logs
-    if (!fs.existsSync('./logs/monitoring/'+Sondes+'.json')) {
+    if (!fs.existsSync(filesdirectory)) {
         WriteDocs("./logs", "./logs/monitoring");
         let logsDataStart = { "Monitoring": [] }
         let datainfoJSON = JSON.stringify(logsDataStart);
@@ -82,11 +95,11 @@ function WriteLogs(data, Sondes) {
         // and writting to data.json file
         let dataJSON = JSON.stringify(datainfoObject);
         // Ecriture des logs
-        fs.writeFileSync("./logs/monitoring/"+Sondes+".json", dataJSON);
+        fs.writeFileSync(filesdirectory, dataJSON);
     }
 
     // Récupération du fichier LOGS
-    let logsData = fs.readFileSync("./logs/monitoring/"+Sondes+".json");
+    let logsData = fs.readFileSync(filesdirectory);
     // Mise en OBJ
     var logobj = JSON.parse(logsData);
     // PUSH TO VARIABLE
@@ -94,7 +107,7 @@ function WriteLogs(data, Sondes) {
     // Mise en Strg
     jsonStr = JSON.stringify(logobj);
     // Ecriture des logs
-    fs.writeFileSync("./logs/monitoring/"+Sondes+".json", jsonStr);
+    fs.writeFileSync(filesdirectory, jsonStr);
 }
 
 function TokenSearch() {
