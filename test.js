@@ -2,7 +2,7 @@ const si = require('systeminformation');
 var osu = require('node-os-utils')
 
 
-function LogDate() {
+function LogDateNohours() {
   // Date object initialized as per New Zealand timezone. Returns a datetime string
   let annee = new Date().getFullYear(),
       mois  = new Date().getMonth(), 
